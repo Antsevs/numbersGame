@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Arrays;
 import java.util.Random;
 public class Game {
-	
+	public int winCount = 0;
 	private static Game obj = new Game();
 	private static Random rand = new Random();
 	private static Scanner scnr = new Scanner(System.in);
@@ -77,7 +77,7 @@ public class Game {
 				arr[index] = randNum;
 				
 				if(count != 0) { //as long as there is more than one number now in list
-					/*for(int i = 0; i < index; i++) { //ensure numbers in front are smaller
+					for(int i = 0; i < index; i++) { //ensure numbers in front are smaller
 						if(arr[i] > arr[index]) {
 							errorCatch = 1;
 							break;
@@ -89,11 +89,12 @@ public class Game {
 							errorCatch = 1;
 							break;
 						}
-					}*/
+					}
 				}
 				if(errorCatch == 1) { //maybe include different color for the number or fail game for user if there is nowhere to place number
 					System.out.println(Arrays.toString(arr));
 					System.out.println("I'm sorry, you lose. Dork.");
+					winCheck = false;
 					break;
 				}
 				System.out.println(Arrays.toString(arr));
@@ -106,18 +107,20 @@ public class Game {
 			}
 		}
 		
-		for(int m = 0; m <= 10; m++) { //check if list is completed successfully
-			if(arr[m] != 0) {
-				winCheck = true;
-			} else {
+		for(int m = 0; m < 10; m++) { //check if list is completed successfully
+			if(arr[m] == 0) {
 				winCheck = false;
 				break;
+			} else {
+				winCheck = true;
 			}
 		}
 		
-		if(winCheck = true) {
+		if(winCheck == true) {
 			System.out.println("Congratulations! You've Won!"
-					+ "Your current streak is" + " games");
+					+ " Your current streak is " + winCount +  " games");
+			winCheck = false;
+			winCount++;
 		}
 	}
 	
